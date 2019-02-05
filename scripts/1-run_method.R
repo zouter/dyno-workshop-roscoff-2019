@@ -8,12 +8,14 @@ library(dplyr)
 
 data("fibroblast_reprogramming_treutlein")
 
+# we'll use an example dataset which is quite small
+# most methods will probably work slower on your dataset
 dim(fibroblast_reprogramming_treutlein$counts)
 
 # Prepare the data -------------------------------------------------------------
 
 # some methods require pure counts, others require normalized expression
-# we there have to provide both
+# we therefore have to provide both
 dataset <- wrap_expression(
   counts = fibroblast_reprogramming_treutlein$counts,
   expression = fibroblast_reprogramming_treutlein$expression

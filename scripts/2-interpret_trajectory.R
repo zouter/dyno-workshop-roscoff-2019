@@ -8,10 +8,17 @@ model <- readRDS("model.rds")
 # Plotting ---------------------------------------------------------------------
 
 # in dimensionality reduction
-# will use by default the dimensionality reduction used by the methods
+# will use by default the dimensionality reduction of the TI method
 plot_dimred(model)
 
 # trajectories can be projected onto any dimensionality reduction
+dimred = dyndimred::dimred_pca(dataset$expression)
+plot_dimred(model, dimred = dimred)
+
+dimred = dyndimred::dimred_tsne(dataset$expression)
+plot_dimred(model, dimred = dimred)
+
+# devtools::install_github("jlmelville/uwot")
 dimred = dyndimred::dimred_umap(dataset$expression, n_neighbors = 200)
 plot_dimred(model, dimred = dimred)
 
@@ -131,3 +138,11 @@ purrr::map(branching_point_features[1:9], function(feature_oi) {
     ggplot2::theme(legend.position = "none") +
     ggplot2::ggtitle(feature_oi)
 }) %>% patchwork::wrap_plots()
+
+
+# Some final tips when inferring trajectories ----------------------------------
+
+# Start slowly: select a subset of cells with a linear trajectory and try to interpret that
+# Explore dimensionality reductions, try to see the trajectory yourself
+# Do a small in silico validation by looking at the most relevant genes
+# A trajectory is still a model - experimental validation is necessary
