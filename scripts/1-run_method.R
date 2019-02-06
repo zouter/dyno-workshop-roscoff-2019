@@ -1,7 +1,7 @@
 # Run this on n59
-# ssh bioinfo.sb-roscoff.fr
-# qlogin -q formation.q@@bignode.formation
-# export PATH=/opt/6.x/R-3.5.1/bin/:$PATH
+# > ssh bioinfo.sb-roscoff.fr
+# > qlogin -q formation.q@@bignode.formation # login onto n59
+# > export PATH=/opt/6.x/R-3.5.1/bin/:$PATH # add R libraries to PATH
 
 library(dyno)
 library(dplyr)
@@ -36,12 +36,13 @@ dataset <- wrap_expression(
 # Go to http://guidelines.dynverse.org
 # When running this on your laptop, you can do `guidelines_shiny()`
 
-# you find a list of all available methods using
+# you can find a list of all available methods using
 dynmethods::methods %>% select(id, name, source)
 
 # Running methods --------------------------------------------------------------
 
 # infer a trajectory using default parameters
+# this will download the container of the method first
 model <- infer_trajectory(dataset, "slingshot")
 
 # the trajectory is contained in the following two variables
