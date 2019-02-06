@@ -20,7 +20,12 @@ plot_dimred(model, dimred = dimred)
 
 # it's possible that you'll have to install umap manually
 # devtools::install_github("jlmelville/uwot")
-dimred = dyndimred::dimred_umap(dataset$expression, n_neighbors = 200)
+dimred = uwot::umap(dataset$expression)
+rownames(dimred) = rownames(dataset$expression)
+plot_dimred(model, dimred = dimred)
+
+dimred = uwot::umap(dataset$expression, n_neighbors = 300)
+rownames(dimred) = rownames(dataset$expression)
 plot_dimred(model, dimred = dimred)
 
 # color cells according to pseudotime
@@ -37,7 +42,7 @@ plot_dimred(
   color_density = "grouping",
   grouping = dyno::fibroblast_reprogramming_treutlein$grouping,
   label_milestones = FALSE
-)
+) + theme(legend.position = "none")
 
 # plot the expression of a feature
 plot_dimred(
