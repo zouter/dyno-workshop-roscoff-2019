@@ -52,7 +52,10 @@ model$progressions
 # infer a trajectory with prior information
 model <- infer_trajectory(dataset, "paga")
 
-dataset <- dataset %>% add_prior_information(start_id = dataset$counts[,"Vim"] %>% which.max() %>% names())
+start_id <- dataset$counts[,"Vim"] %>%
+  which.max() %>%
+  names()
+dataset <- add_prior_information(dataset, start_id = start_id)
 
 model <- infer_trajectory(dataset, "paga")
 
