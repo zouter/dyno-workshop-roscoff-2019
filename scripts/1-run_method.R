@@ -9,7 +9,7 @@ library(dplyr)
 data("fibroblast_reprogramming_treutlein")
 
 # we'll use an example dataset which is quite small
-# most methods will probably work slower on your dataset
+# most methods will probably take much longer on your dataset
 dim(fibroblast_reprogramming_treutlein$counts)
 
 # Prepare the data -------------------------------------------------------------
@@ -21,9 +21,23 @@ dataset <- wrap_expression(
   expression = fibroblast_reprogramming_treutlein$expression
 )
 
-# Choosing what method to ruun -------------------------------------------------
-# Go to http://35.232.29.209/ or guidelines.dynverse.org
+# To select genes or not to select genes? That is the questions
+# Pro:
+# - Some methods don't scale well with a lot of genes
+# - Some methods include their own feature selection
+# - Noise can make it really difficult to infer a trajectory
+# Contra:
+# - Every step adds yet another bias
+
+# As Antonio said:
+# => Try first without filtering, if that doesn't work try with filtering
+
+# Choosing what method to run -------------------------------------------------
+# Go to http://guidelines.dynverse.org
 # When running this on your laptop, you can do `guidelines_shiny()`
+
+# you find a list of all available methods using
+dynmethods::methods %>% select(id, name, source)
 
 # Running methods --------------------------------------------------------------
 

@@ -18,6 +18,7 @@ plot_dimred(model, dimred = dimred)
 dimred = dyndimred::dimred_tsne(dataset$expression)
 plot_dimred(model, dimred = dimred)
 
+# it's possible that you'll have to install umap manually
 # devtools::install_github("jlmelville/uwot")
 dimred = dyndimred::dimred_umap(dataset$expression, n_neighbors = 200)
 plot_dimred(model, dimred = dimred)
